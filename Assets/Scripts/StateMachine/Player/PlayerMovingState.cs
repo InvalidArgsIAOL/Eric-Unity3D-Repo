@@ -18,6 +18,8 @@ public class PlayerMovingState : PlayerBaseState
 
     private readonly float CrossFadeDuration = 0.1f;
 
+    private float gettingTired = 0f;
+
     public PlayerMovingState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
     }
@@ -35,9 +37,12 @@ public class PlayerMovingState : PlayerBaseState
 
         Move(movement * stateMachine.MovementSpeed, deltaTime);
 
+        gettingTired += deltaTime;
+
         if (stateMachine.InputReader.MovementValue == Vector2.zero)
         {
-            stateMachine.SwitchState(new PlayerIdleState(stateMachine));
+            Debug.Log(gettingTired);
+            stateMachine.SwitchState(new PlayerIdleState(stateMachine, gettingTired >= 10f));
             return;
         }
         stateMachine.Animator.SetFloat(MovingSpeedHash, 1, AnimatorBuffer, deltaTime);

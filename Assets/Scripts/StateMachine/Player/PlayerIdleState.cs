@@ -24,6 +24,8 @@ public class PlayerIdleState : PlayerBaseState
 
     private readonly int IdleHash = Animator.StringToHash("Idle"); // Hashing so we don't have to write strings everywhere.
 
+    private readonly int ExhaustedHash = Animator.StringToHash("Exhausted"); // Hashing so we don't have to write strings everywhere.
+
     private float CrossFadeDuration = 0.1f;
 
     private float LastNormalizedTime; // Used for transitioning between long idle and shortidle
@@ -36,14 +38,26 @@ public class PlayerIdleState : PlayerBaseState
 
     private bool AnimationSwapDone = false; // If false, we are okay to execute a altIdle once the time til AnimSwap is complete!
 
+    // Exhausted after doing stuff
+    private bool isTired = false;
+
     #endregion
 
-    public PlayerIdleState(PlayerStateMachine stateMachine) : base(stateMachine) { }
+    public PlayerIdleState(PlayerStateMachine stateMachine, bool isTired = false) : base(stateMachine) 
+    {
+        this.isTired = isTired;
+    }
 
     public override void Enter()
     {
-        Debug.Log("We are doing stuff in enter");
-        stateMachine.Animator.CrossFadeInFixedTime(IdleHash, CrossFadeDuration);
+        if (isTired) // If we are exhausted, play this animation instead.
+        {
+            stateMachine.Animator.CrossFadeInFixedTime(ExhaustedHash, CrossFadeDuration);
+        }
+        else
+        {
+            stateMachine.Animator.CrossFadeInFixedTime(IdleHash, CrossFadeDuration);
+        }
     }
 
     public override void Running(float deltaTime)
@@ -59,8 +73,6 @@ public class PlayerIdleState : PlayerBaseState
         LastNormalizedTime = GetNormalizedTime(stateMachine.Animator, "Idle"); // The tag for all idle states is Idle.
 
         IdleAnimationSwap(deltaTime);
-
-
 
     }
 

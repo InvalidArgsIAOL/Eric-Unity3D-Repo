@@ -27,6 +27,10 @@ public class PlayerStateMachine : StateMachine
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked; // snaps to center of the screen.
+
+        Cursor.visible = false;
+
         MainCameraTransform = Camera.main.transform;
 
         SwitchState(new PlayerIdleState(this));
