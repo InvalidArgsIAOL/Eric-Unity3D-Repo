@@ -12,7 +12,9 @@ using System;
 /// </summary>
 public class InputReader : MonoBehaviour, PlayerControls.IPlayerActions
 {
-    public event Action IsMoving;
+    public bool IsAttacking;
+
+    public event Action DodgeEvent;
 
     public Vector2 MovementValue; // This is input in the cardinal directions for KB+M.
 
@@ -49,5 +51,25 @@ public class InputReader : MonoBehaviour, PlayerControls.IPlayerActions
     {
         // We are obtaining the movement direction vector here.
         MovementValue = context.ReadValue<Vector2>();
+    }
+
+    public void OnDodge(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            DodgeEvent?.Invoke();
+        }
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            IsAttacking = true;
+        }
+        else if (context.canceled)
+        {
+            IsAttacking = false;
+        }
     }
 }

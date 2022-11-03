@@ -33,6 +33,12 @@ public class PlayerMovingState : PlayerBaseState
 
     public override void Running(float deltaTime)
     {
+        if (stateMachine.InputReader.IsAttacking) // Attacking Check
+        {
+            stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 0)); // 0 because we always start with first combo in chain
+            return;
+        }
+
         Vector3 movement = CalculateMovement();
 
         Move(movement * stateMachine.MovementSpeed, deltaTime);

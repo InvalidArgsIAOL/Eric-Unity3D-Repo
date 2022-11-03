@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31962201}
-  m_LocalRotation: {x: 0.08887497, y: -0.00000001766575, z: 0.0000000015762806, w: 0.9960428}
+  m_LocalRotation: {x: 0.08887499, y: -0.000000003923911, z: 3.50123e-10, w: 0.9960428}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -356,7 +356,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1114844208}
-  m_LocalRotation: {x: 0.07079068, y: 1e-45, z: -0, w: 0.9974912}
+  m_LocalRotation: {x: 0.07079069, y: -0.0000000030783889, z: 2.1846938e-10, w: 0.9974912}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -592,7 +592,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1809161796}
-  m_LocalRotation: {x: 0.10697776, y: -0.00000001710764, z: 0.0000000018406997, w: 0.99426144}
+  m_LocalRotation: {x: 0.1069778, y: 0.000000020186324, z: -0.0000000021719522, w: 0.99426144}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7391,6 +7391,7 @@ GameObject:
   - component: {fileID: 4367105339611991743}
   - component: {fileID: 3847035984475285359}
   - component: {fileID: 5130599339798459358}
+  - component: {fileID: 1353867228}
   m_Layer: 0
   m_Name: unitychan
   m_TagString: Untagged
@@ -7431,8 +7432,13 @@ MonoBehaviour:
   <Animator>k__BackingField: {fileID: 3847035984475285359}
   <Controller>k__BackingField: {fileID: 5130599339798459358}
   <InputReader>k__BackingField: {fileID: 4367105339611991743}
-  <MovementSpeed>k__BackingField: 5
+  <MovementSpeed>k__BackingField: 6
   <RotationBuffer>k__BackingField: 8
+  <ForceReceiver>k__BackingField: {fileID: 1353867228}
+  <AttackList>k__BackingField:
+  - <AnimationName>k__BackingField: SlideAttack
+    <DurationOfForce>k__BackingField: 0.1
+    <Force>k__BackingField: 20
 --- !u!114 &4367105339611991743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7445,6 +7451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8adfab317e364d4094f37940f6c43f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsAttacking: 0
   MovementValue: {x: 0, y: 0}
 --- !u!95 &3847035984475285359
 Animator:
@@ -7481,9 +7488,23 @@ CharacterController:
   m_Radius: 0.2
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_SkinWidth: 0.025
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.75, z: 0}
+--- !u!114 &1353867228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3847035984467858921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9fb195d04e0f8b4fa798f783ff6aa17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 5130599339798459358}
+  drag: 0.3
 --- !u!1 &3847035984467858923
 GameObject:
   m_ObjectHideFlags: 0

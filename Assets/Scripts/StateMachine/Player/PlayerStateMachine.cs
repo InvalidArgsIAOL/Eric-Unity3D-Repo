@@ -22,7 +22,11 @@ public class PlayerStateMachine : StateMachine
 
     [field: SerializeField] public float RotationBuffer { get; internal set; } // Tutorial - used for damping the movement of the Cinemachine Camera
 
+    [field: SerializeField] public ForceReceiver ForceReceiver { get; internal set; }
 
+
+
+    [field: SerializeField] public Attack[] AttackList { get; internal set; } // List in case we want to expand to more attacks
     public Transform MainCameraTransform { get; private set; }
 
     void Start()
